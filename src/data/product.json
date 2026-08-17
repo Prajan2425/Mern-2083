@@ -1,0 +1,122 @@
+{
+  "customer": {
+    "id": "CUST001",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "phone": "+1-9876543210",
+    "address": {
+      "street": "123 Main Street",
+      "city": "New York",
+      "state": "NY",
+      "country": "USA",
+      "zipCode": "10001"
+    }
+  },
+
+  "products": [
+    {
+      "id": "Pkjadsf84ui3t09iwodv",
+      "name": "Apple iPhone 16 Pro",
+      "category": "Smartphone",
+      "brand": "Apple",
+      "price": 1199,
+      "stock": 20,
+      "rating": 4.9,
+      "description": "6.3-inch Super Retina XDR display, A18 Pro chip, 256GB Storage.",
+      "image": "iphone16pro.jpg",
+      "isFeatured": true
+    },
+    {
+      "id": "P002",
+      "name": "Samsung Galaxy S25 Ultra",
+      "category": "Smartphone",
+      "brand": "Samsung",
+      "price": 1299,
+      "stock": 15,
+      "rating": 4.8,
+      "description": "6.9-inch Dynamic AMOLED display, Snapdragon processor, 512GB Storage.",
+      "image": "galaxys25ultra.jpg",
+      "isFeatured": true
+    },
+    {
+      "id": "P003",
+      "name": "Sony WH-1000XM6",
+      "category": "Headphones",
+      "brand": "Sony",
+      "price": 399,
+      "stock": 35,
+      "rating": 4.8,
+      "description": "Wireless Noise Cancelling Bluetooth Headphones.",
+      "image": "sonyxm6.jpg",
+      "isFeatured": false
+    },
+    {
+      "id": "P004",
+      "name": "Apple Watch Series 11",
+      "category": "Smart Watch",
+      "brand": "Apple",
+      "price": 499,
+      "stock": 18,
+      "rating": 4.7,
+      "description": "GPS Smart Watch with Fitness Tracking.",
+      "image": "applewatch11.jpg",
+      "isFeatured": true
+    },
+    {
+      "id": "P005",
+      "name": "Dell XPS 15",
+      "category": "Laptop",
+      "brand": "Dell",
+      "price": 1899,
+      "stock": 10,
+      "rating": 4.9,
+      "description": "Intel Core Ultra 7, 32GB RAM, 1TB SSD.",
+      "image": "dellxps15.jpg",
+      "isFeatured": false
+    }
+  ],
+
+  "cart": [
+    {
+      "productId": "P001",
+      "quantity": 1
+    },
+    {
+      "productId": "P003",
+      "quantity": 2
+    }
+  ],
+
+  "order": {
+    "orderId": "ORD1001",
+    "customerId": "CUST001",
+    "orderDate": "2026-08-04",
+    "status": "Processing",
+    "paymentMethod": "Credit Card",
+    "paymentStatus": "Paid",
+    "shippingAddress": {
+      "street": "123 Main Street",
+      "city": "New York",
+      "state": "NY",
+      "country": "USA",
+      "zipCode": "10001"
+    },
+    "items": [
+      {
+        "productId": "P001",
+        "quantity": 1,
+        "price": 1199
+      },
+      {
+        "productId": "P003",
+        "quantity": 2,
+        "price": 399
+      }
+    ],
+    "subtotal": 1997,
+    "shippingCost": 20,
+    "tax": 159.76,
+    "total": 2176.76
+  }
+}
