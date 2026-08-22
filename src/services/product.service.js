@@ -1,5 +1,7 @@
 import fs from "fs/promises";
 import Products from "../models/Products.js";
+import uploadFile from "../utils/fileuploader.js";
+import { file } from "zod";
 
 const getAllProducts = async (query) => {
   const sort =  query.sort? JSON.parse(query.sort): {};
@@ -23,13 +25,18 @@ const getProductById = async (id) =>{
     const products = await Products.findById(id);
     return products;
 };
-const createProduct = async (data, userId) => {
-   console.log("userId:", userId);
-  return await Product.create({...data, createdBy:userId});
+const createProduct = async (data, files, userId) => {
+  const uploadedFiles = await uploadFile(files);
+  return await Products.create({...data, imageUrls:uploadedFiles.map((file)=> file.url), createdBy:userId});
 };
 
-const updateProduct = async (id, input) => {
-  return await Products.findByIdAndUpdate(id, input, {new:true});
+const updateProduct = async (id, input, files) => {
+  const updateData = input;
+  if(files && files.length > 0){
+    const uploadedFiles = await uploadFile(files);
+    updateData.imageUrls = uploadedFiles.map((file) => file.url);
+  }
+  return await Products.findByIdAndUpdate(id, updateData, {new:true});
 };
 
 const deleteProduct = async (id) => {

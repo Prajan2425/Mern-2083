@@ -20,4 +20,9 @@ const deleteUser = async (id) => {
     await User.findByIdAndDelete(id);
 };
 
-export default {createUser, getAllUsers, getById, updateUser, deleteUser};
+const updateProfileImage = async (id, file) => {
+    const uploadedFiles = await uploadFile([file]);
+    return await User.findByIdAndUpdate(id, {profileImageUrl:uploadedFiles[0].url}, {new: true});
+};
+
+export default {createUser, getAllUsers, getById, updateUser, deleteUser, updateProfileImage};

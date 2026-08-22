@@ -1,5 +1,5 @@
-
 import productService from "../services/product.service.js";
+
 
 const getAllProducts = async (req, res) => {
     const products = await productService.getAllProducts(req.query);
@@ -15,8 +15,9 @@ const getProductById = async (req, res) => {
 
 const createProduct = async (req, res) => {
     const userId = req.user._id;
+
    try{
-    const products = await productService.createProduct(req.body, userId);
+    const products = await productService.createProduct(req.body, req.files, userId);
     res.json(products);
    } catch (error) {
     res.status(404).send(error.message);
@@ -27,7 +28,7 @@ const updateProduct = async (req, res) => {
     const id = req.params.id;
     const input = req.body;
    try{
-    const products = await productService.updateProduct(id, input);
+    const products = await productService.updateProduct(id, input, req.files);
     res.json(products);
    } catch (error) {
     res.status(404).send(error.message);
