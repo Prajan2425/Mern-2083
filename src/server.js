@@ -4,6 +4,7 @@ import config from "./config/config.js";
 import connectDB from "./config/database.js";
 import productRoute from "./routes/product.route.js";
 import userRoute from "./routes/user.route.js";
+import orderRoute from "./routes/order.route.js";
 import authRoute from "./routes/auth.route.js";
 import bodyParser from "body-parser";
 import logger from "./middlewares/logger.js";
@@ -21,20 +22,17 @@ app.use(bodyParser.json());
 app.use(logger);
 
 app.get("/", (req, res)=>{
-    res.send("Home page");
-});
-
-app.get("/about", (req, res)=>{
-    res.send("About Page")
-});
-
-app.post("/contact", (req, res)=>{
-    res.send("Contact fomr submit")
+    res.json({
+        status: "OK",
+        version: "0.1.0",
+        port: config.port,
+    })
 });
 
 app.use("/api/products",upload.array("images", 5), productRoute);
 app.use("/api/users", auth, upload.single("image"), userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/orders", auth, orderRoute);
 
 app.listen(config.port, (req, res)=> {
     console.log(`Server started at ${config.port} port.`);
