@@ -6,7 +6,7 @@ import { userSchema } from './user.schema.js';
 export const loginSchema = z.object({
     email: z.string({error: "Email is required"}).regex(emailRegex, {error:"Invalide email"}).optional(), 
 
-    phone: z.string({error:"Phone Number is required"}),
+    phone: z.string({error:"Phone Number is required"}).optional(),
 
     password: z.string(),
 })
@@ -15,4 +15,16 @@ export const loginSchema = z.object({
     path: ["email"],          //path to highlight the error
 });
 
-export const registerScheme = userSchema;
+export const registerSchema = userSchema;
+
+export const forgotPasswordSchema = z.object({
+    email: z.
+    string({error: "email is required"})
+    .regex(emailRegex, {error: "Invalid email"}),
+});
+
+export const resetPasswordSchema = z.object({
+    password: z.string(),
+    userId: z.string(),
+    token: z.string(),
+});

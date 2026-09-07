@@ -1,6 +1,7 @@
 import Order from "../models/Order.js";
 import orderService from "../services/order.service.js";
 
+
 const getOrders = async(req, res) => {
     try {
         const orders = await orderService.getOrders();
@@ -56,7 +57,8 @@ const deleteOrder = async(req, res) => {
 
 const confirmOrder = async(req, res) => {
     try {
-    const order = await orderService.confirmOrder(req.params.id);
+    const order = await orderService.confirmOrder(req.params.id, req.body?.status);
+    res.json(order);
 } catch (error) {
     res.status(400).json(error.message);
 }};
@@ -77,4 +79,22 @@ const getOrdersByMerchant = async(req, res) => {
     res.status(400).json(error.message);
 }};
 
-export default {getOrders, getOrderById, createOrder, updateOrderStatus, cancelOrder, deleteOrder, confirmOrder, getOrdersByUser,getOrdersByMerchant};
+const orderPaymentViaCash = async(req, res) => {
+    try{
+        const order = await orderService.orderPaymentViaCash(req.params.id);
+        res.json(order);
+    } catch(error){
+        res.status(400).json(error.message);
+    }
+};
+
+const orderPaymentViaKhalti = async(req, res) => {
+    try{
+        const order = await orderService.orderPaymentViaKhalti(req.params.id);      
+        res.json(order);
+    } catch(error){
+        res.status(400).json(error.message);
+    }   
+};
+
+export default {getOrders, getOrderById, createOrder, updateOrderStatus, cancelOrder, deleteOrder, confirmOrder, getOrdersByUser,getOrdersByMerchant, orderPaymentViaCash, orderPaymentViaKhalti};

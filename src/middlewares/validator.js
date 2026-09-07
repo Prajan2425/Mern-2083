@@ -5,7 +5,10 @@ const validate = (schema)=>(req, res, next)=>{
     schema.parse(req.body);
     next();   
   } catch (error) {
-    res.json(error);
+     res.status(400).json({
+            message: "Validation error",
+            errors: error.issues,
+        });
   }
 };
 

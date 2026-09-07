@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { ORDER_STATUS_CANCELLED, ORDER_STATUS_CONFIRMED, ORDER_STATUS_DELIVERED, ORDER_STATUS_PENDING, ORDER_STATUS_SHIPPED } from "../constants/orderStatus.js";
+import { required } from 'zod/mini';
 
 const orderSchema = new mongoose.Schema({
     user:{
@@ -49,7 +50,7 @@ const orderSchema = new mongoose.Schema({
     },
     orderNumber:{
         type: String,
-        orderNumber: [true, "Order number is required"],
+        required: [true, "Order number is required"],
     },
     totalPrice:{
         type: Number,

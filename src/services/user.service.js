@@ -5,7 +5,7 @@ const getAllUsers = async() => {
 };
 
 const getById = async (id)=>{
-    return await User.create(data);
+    return await User.findById(id);
 };
 
 const createUser = async (data) => {

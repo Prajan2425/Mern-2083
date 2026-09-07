@@ -21,6 +21,10 @@ router.patch("/:id/cancel", roleBasedAuth(ROLE_CUSTOMER), orderController.cancel
 
 router.put("/:id/confirm", roleBasedAuth(ROLE_CUSTOMER), orderController.confirmOrder);
 
+router.put("/:id/payment/cash", roleBasedAuth(ROLE_CUSTOMER), orderController.orderPaymentViaCash);
+
+router.put("/:id/payment/khalti", roleBasedAuth(ROLE_CUSTOMER), orderController.orderPaymentViaKhalti);
+
 router.delete("/:id", roleBasedAuth(ROLE_ADMIN), orderController.deleteOrder);
 
 export default router;
