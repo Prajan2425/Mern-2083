@@ -73,7 +73,7 @@ const getOrdersByUser = async(req, res) => {
 
 const getOrdersByMerchant = async(req, res) => {
     try {
-    const orders = await orderService.getOrdersByMerchant();
+    const orders = await orderService.getOrdersByMerchant(req.user._id);
     res.json(orders)
 } catch (error) {
     res.status(400).json(error.message);

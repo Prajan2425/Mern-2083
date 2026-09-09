@@ -13,6 +13,13 @@ if (!user){
         message: "User not found",
     };
 }
+
+if(!user.isActive){
+    throw{
+        status: 403,
+        message: "User is not active",
+    };
+}
  const isPasswordMatch = bcrypt.compareSync(data.password, user.password);
 
  if (!isPasswordMatch){
@@ -44,6 +51,8 @@ const register = async (data) => {
 
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(data.password, salt);
+    delete data.role; // remove role from data to prevent users from assigning themselves roles
+
     const createdUser = await User.create({
         ...data,
         password: hashedPassword,

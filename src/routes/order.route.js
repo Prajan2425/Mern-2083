@@ -9,9 +9,9 @@ router.get("/", roleBasedAuth(ROLE_ADMIN), orderController.getOrders);
 
 router.get("/user", roleBasedAuth(ROLE_CUSTOMER), orderController.getOrdersByUser);
 
-router.get("/:id", orderController.getOrderById);
-
 router.get("/merchant", roleBasedAuth(ROLE_MERCHANT) ,orderController.getOrdersByMerchant);
+
+router.get("/:id", orderController.getOrderById);
 
 router.post("/", roleBasedAuth(ROLE_CUSTOMER), orderController.createOrder);
 

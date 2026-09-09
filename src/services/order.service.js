@@ -6,6 +6,7 @@ import { payViaKhalti } from "../utils/payment.js";
 import { PAYMENT_METHOD_ONLINE, PAYMENT_STATUS_FAILED, PAYMENT_STATUS_SUCCESS } from "../constants/payment.js";
 import User from "../models/User.js";
 import userService from "./user.service.js";
+import mongoose from "mongoose";
 
 //For Admin 
 const getOrders = async() => {
@@ -77,7 +78,24 @@ const getOrdersByUser = async (userId) => {
     .populate("orderItems.product", "name brand category price imageUrls");
 };
 
-const getOrdersByMerchant = () => {};
+const getOrdersByMerchant = async(merchantId) => {
+    
+return await Order.aggregate([
+ {
+       $lookup: {
+        from: "products",
+        localField:"orderItems.product",
+        foreignField: "_id",
+        as: "orderedProducts" 
+    },
+ }, 
+ {
+    $match:{
+        "orderedProducts.createdBy": new mongoose.Types.ObjectId(merchantId),
+    },
+ }
+]);
+};
 
 //payment
 const orderPaymentViaCash = async(id) => {

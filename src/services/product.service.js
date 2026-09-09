@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import Products from "../models/Products.js";
-import uploadFile from "../utils/fileuploader.js";
+import uploadFile from "../utils/fileUploader.js";
 import { file } from "zod";
 
 const getAllProducts = async (query) => {
