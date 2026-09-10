@@ -22,7 +22,7 @@ const getOrderById = async(req, res) => {
 
 const createOrder = async(req, res) => {
     try {
-        const createdOrder = await orderService.createOrder(req.body, req.user._id);
+        const createdOrder = await orderService.createOrder(req.body, req.user);
         res.json(createdOrder);
 } catch (error) {
     res.status(400).json(error.message);

@@ -28,13 +28,13 @@ const getOrderById = async(id) => {
     return order;
 };
 
-const createOrder = async(data, userId) => {
-    const user = await userService.getById(userId);
+const createOrder = async(data, authUser) => {
+    const user = await userService.getById(authUser._id, authUser);
     if (!data.shippingAddress){
         data.shippingAddress = user.address;
     }
     data.orderNumber = crypto.randomUUID();
-    data.user = userId; 
+    data.user = authUser._id; 
     return await Order.create(data);
 };
 
@@ -81,7 +81,19 @@ const getOrdersByUser = async (userId) => {
 const getOrdersByMerchant = async(merchantId) => {
     
 return await Order.aggregate([
+
  {
+    $lookup: {
+        from: "users",
+        localField: "user",
+        foreignField: "_id",
+        as: "orderUser"
+    },
+ },
+ {
+    $unwind: "$orderUser"
+ },
+  {
        $lookup: {
         from: "products",
         localField:"orderItems.product",
@@ -93,7 +105,29 @@ return await Order.aggregate([
     $match:{
         "orderedProducts.createdBy": new mongoose.Types.ObjectId(merchantId),
     },
- }
+ },
+ {
+    $project: {
+        orderNumber: 1,
+        user: 1,
+        payment: 1,
+        shippingAddress: 1,
+        status: 1,
+        totalPrice: 1,
+        "orderItems.quantity": 1,
+        "orderUser._id": 1,
+         "orderUser.name": 1,
+        "orderUser.email": 1,
+        "orderUser.phone": 1,
+        "orderedProducts._id": 1,
+        "orderedProducts.name": 1,
+        "orderedProducts.price": 1,
+        "orderedProducts.brand": 1,
+        "orderedProducts.category": 1,
+        "orderedProducts.imageUrls": 1,
+       
+ },
+},
 ]);
 };
 
