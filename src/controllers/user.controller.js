@@ -56,7 +56,7 @@ const updateProfileImage = async(req, res) => {
 
 const updateUserRoles = async(req, res) => {
     try {
-        const user = await userService.updateUserRoles(req.params.id, req.body?.roles, req.user);
+        const user = await userService.updateUserRoles(req.params.id, req.body?.role, req.user);
         res.json(user);
     } catch (error) {
         res.status(error.status||400).send(error.message);

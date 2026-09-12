@@ -73,7 +73,7 @@ const updateProfileImage = async (id, file) => {
     return await User.findByIdAndUpdate(id, {profileImageUrl:uploadedFiles[0].url}, {new: true});
 };
 
-const updateUserrole = async (id, role, authUser) => {
+const updateUserRoles = async (id, role, authUser) => {
     if((role.includes(ROLE_ADMIN) || role.includes(ROLE_SUPER_ADMIN)) && !authUser.role.includes(ROLE_SUPER_ADMIN)){
         throw{
             status: 403,
@@ -83,4 +83,4 @@ const updateUserrole = async (id, role, authUser) => {
     return await User.findByIdAndUpdate(id, {role}, {returnDocument: "after"});
 };
 
-export default {createUser, getAllUsers, getById, updateUser, deleteUser, updateProfileImage, updateUserrole};
+export default {createUser, getAllUsers, getById, updateUser, deleteUser, updateProfileImage, updateUserRoles};
