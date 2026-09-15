@@ -33,6 +33,10 @@ const productSchema = new mongoose.Schema ({
         default: []
     },
 
+        description: {
+            type: String,
+        },
+
     createdBy: {
         type: mongoose.Schema.ObjectId,
         ref:"User",

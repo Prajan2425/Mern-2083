@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Prajan2425/Prajan2425.gihub.io#readme",
   "dependencies": {
+    "@google/genai": "^2.22.0",
     "axios": "^1.20.0",
     "bcrypt": "^6.0.0",
     "body-parser": "^2.3.0",
