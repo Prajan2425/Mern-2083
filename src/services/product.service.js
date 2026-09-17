@@ -6,9 +6,9 @@ import { PRODCUT_DESCRIPTION_PROMPT } from "../constants/prompt.js";
 import promptAi from "../utils/ai.js";
 
 const getAllProducts = async (query) => {
-  const sort =  query.sort? JSON.parse(query.sort): {};
-  const limit = query.limit?? 10;
-  const offset = query.offset?? 0;
+  const sort =  query?.sort? JSON.parse(query.sort): {};
+  const limit = query?.limit?? 10;
+  const offset = query?.offset?? 0;
 
   const filters = {};
   const {category, brands, name, min, max, createdBy} = query;
@@ -35,7 +35,7 @@ const createProduct = async (data, files, userId) => {
   .replace("%s", data.category);
 
   const description = data.description ?? (await promptAi(promptMessage));
-  return await Products.create({...data, imageUrls:uploadedFiles.map((file)=> file.url), createdBy:userId});
+  return await Products.create({...data, description, imageUrls:uploadedFiles.map((file)=> file.url), createdBy:userId});
 };
 
 const updateProduct = async (id, input, files) => {
