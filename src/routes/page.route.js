@@ -7,4 +7,6 @@ router.get("/", pageController.getHomeView);
 
 router.get("/products", pageController.getProductsView);
 
+router.get("/products/:id", pageController.getProductByIdView);
+
 export default router;

@@ -19,13 +19,14 @@
         </thead>
 
         <tbody>
-            {{#each items}}
+            {{#each products}}
             <tr>
                 <td>{{ _id }}</td>
                 <td>{{ name }}</td>
                 <td>{{ brand }}</td>
                 <td>{{ category }}</td>
                 <td>Rs.{{price}}</td>
+                <td><a href="products/{{id}}">Views</a></td>
             </tr>
             {{/each}}
         </tbody>

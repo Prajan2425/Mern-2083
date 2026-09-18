@@ -10,4 +10,9 @@ const getProductsView = async(req, res) => {
     const products = await productService.getAllProducts({});
     res.render("products.hbs",{products});
 };
-export default {getHomeView, getProductsView};
+
+const getProductByIdView = async(req, res) => {
+    const product = await productService.getProductById(req.params.id);
+    res.render("product.hbs", {product});
+};
+export default {getHomeView, getProductsView, getProductByIdView};
