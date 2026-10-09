@@ -9,7 +9,7 @@ import { ROLE_ADMIN, ROLE_MERCHANT } from "../constants/roles.js";
 
 const router = express.Router(); 
 
-router.get("/", auth, productController.getAllProducts);
+router.get("/", productController.getAllProducts);
 
 router.get("/brands", productController.getBrands);
 
