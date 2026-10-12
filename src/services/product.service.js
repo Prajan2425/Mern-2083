@@ -34,7 +34,19 @@ const createProduct = async (data, files, userId) => {
   .replace("%s", data.brand)
   .replace("%s", data.category);
 
-  const description = data.description ?? (await promptAi(promptMessage));
+  let description = data.description?.trim() || "";
+
+if (!description) {
+  try {
+    description = await promptAi(promptMessage);
+  } catch (error) {
+    console.error(
+      "Gemini description generation failed:",
+      error.message
+    );
+    description = "";
+  }
+}
   return await Products.create({...data, description, imageUrls:uploadedFiles.map((file)=> file.url), createdBy:userId});
 };
 

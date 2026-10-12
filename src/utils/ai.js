@@ -9,7 +9,7 @@ const promptAi = async (promptMessage) =>{
     model: 'gemini-2.5-flash',
     contents: promptMessage,
   });
-  console.log(response.text);
+  return response.text?.trim() || '';
 };
 
 export default promptAi;
