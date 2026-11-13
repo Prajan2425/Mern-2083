@@ -37,11 +37,13 @@ const productSchema = new mongoose.Schema ({
             type: String,
         },
 
-    createdBy: {
+      createdBy: {
         type: mongoose.Schema.ObjectId,
-        ref:"User",
+        ref: "User",
         required: [true, "Created by user id is required"]
     }
+}, {
+    timestamps: true
 });
 
 export default mongoose.model("Products", productSchema);   
