@@ -4,6 +4,7 @@ import uploadFile from "../utils/fileUploader.js";
 import { file } from "zod";
 import { PRODCUT_DESCRIPTION_PROMPT } from "../constants/prompt.js";
 import promptAi from "../utils/ai.js";
+import { ROLE_ADMIN } from "../constants/roles.js";
 
 const getAllProducts = async (query) => {
   const sort =  query?.sort? JSON.parse(query.sort): {};
@@ -59,7 +60,14 @@ const updateProduct = async (id, input, files) => {
   return await Products.findByIdAndUpdate(id, updateData, {new:true});
 };
 
-const deleteProduct = async (id) => {
+const deleteProduct = async (id, authUser) => {
+  const prodcut = await getProductById(id);
+    if(authUser._id !== product.createdBy.toString() && !authUser.role.includes(ROLE_ADMIN)){
+          throw {
+              status: 403,
+              message: "Access denied"
+          };
+      }
   return await Products.findByIdAndDelete(id);
 };
 
