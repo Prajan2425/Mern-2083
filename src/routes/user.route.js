@@ -1,6 +1,6 @@
 import express from "express";
 import userController from "../controllers/user.controller.js";
-import { ROLE_ADMIN, ROLE_MERCHANT } from "../constants/roles.js";
+import { ROLE_ADMIN } from "../constants/roles.js";
 import roleBasedAuth from "../middlewares/roleBasedAuth.js";
 
 const router = express.Router();

@@ -61,7 +61,7 @@ const updateProduct = async (id, input, files) => {
 };
 
 const deleteProduct = async (id, authUser) => {
-  const prodcut = await getProductById(id);
+  const product = await getProductById(id);
     if(authUser._id !== product.createdBy.toString() && !authUser.role.includes(ROLE_ADMIN)){
           throw {
               status: 403,
