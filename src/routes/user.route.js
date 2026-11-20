@@ -15,7 +15,7 @@ router.post("/",roleBasedAuth(ROLE_ADMIN), userController.createUser);
 
 router.put("/:id", userController.updateUser);
 
-router.delete("/:id", roleBasedAuth(ROLE_MERCHANT), userController.deleteUser);
+router.delete("/:id", roleBasedAuth(ROLE_ADMIN), userController.deleteUser);
 
 router.patch("/:id/role", roleBasedAuth(ROLE_ADMIN), userController.updateUserRoles);
 
